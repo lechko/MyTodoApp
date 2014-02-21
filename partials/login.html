@@ -1,0 +1,57 @@
+<section id="loginpage">
+	
+	<header id="header">
+		<h1>{{title}}</h1>
+
+	</header>
+	<p>{{reason}}</p>
+	<section ng-show="isRegister" ng-submit="submitRegister()" ng-cloak> <!-- TODO: should we add nonvalidate here so that html5 wont validate for us? -->
+		<p>All fields are required</p>
+		<form name="registerForm">
+			<p>
+				<label for="fullname">Full Name: </label> 
+				<input type="text" name="fullname" ng-model="fullName" required>
+				<p ng-show="illegalCharsInName">Only a-z, A-Z may be used for name</p>
+			</p>
+			<p>
+				<label for="username">User Name: </label> 
+				<input type="text" name="username" ng-model="userName" ng-maxlength="20" required>
+				<p ng-show="registerForm.username.$invalid && registerForm.username.$dirty && registerForm.username.$error.maxlength">field should be up to 20 characters</p>
+				<p ng-show="illegalCharsInUsername">Only characters (a-z, A-Z), digits (0-9), and underscore (_) allowed</p>
+				<p ng-show="userNameAlreadyExists">Username exists. Choose a different one</p>
+			</p>
+			<p>
+				<label for="password">Password: </label> 
+				<input type="password" name="password" ng-model="password" required>
+			</p>
+			<p>
+				<label for="verifypass">Verify Password: </label> 
+				<input type="password" name="verifypass" ng-model="verify" required>
+				<p ng-show="passwordMismatch">No match in password</p>
+			</p>
+
+			<button type="submit" name="submit">Register</button>
+		</form>
+		<p>Already Registered? <a href="#/login">Login</a></p>
+	</section>
+
+	<section ng-show="!isRegister" ng-submit="submitLogin()" ng-cloak>
+		<form name="loginForm">
+			<p>
+				<label for="username">User Name: </label> 
+				<input type="text" name="username" ng-model="userName" ng-maxlength="20" required>
+				<p ng-show="loginForm.username.$invalid && loginForm.username.$dirty && loginForm.username.$error.maxlength">field should be up to 20 characters</p>
+				<p ng-show="illegalCharsInUsername">Only characters (a-z, A-Z), digits (0-9), and underscore (_) allowed</p>
+			</p>
+			<p>
+				<label for="password">Password: </label> 
+				<input type="password" name="password" ng-model="password" required>
+			</p>
+			<p ng-show="passwordMismatch">Username or password are incorrect</p>
+			<button type="submit" name="submit">Login</button>
+		</form>
+		<p>Not registered? <a href="#/register">Register</a></p>
+	</section>
+	
+
+</section>

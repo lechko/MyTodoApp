@@ -1,0 +1,1 @@
+added charset=utf-8 for textual content types

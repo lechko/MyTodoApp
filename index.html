@@ -1,0 +1,22 @@
+<!doctype html>
+<html ng-app="myTodoMVCApp">
+<head>
+	<title>My TodoMVC</title>
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<style>[ng-cloak] {display: none;} </style> 
+	<!-- elements marked with ng-cloak will be hidden until after ng compiler finishes -->
+	<script src="angular/angular.js"></script>
+	<script src="angular/angular-route.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/todosHttpService.js"></script>
+	<script type="text/javascript" src="js/controllers.js"></script>
+	<script type="text/javascript" src="js/todosService.js"></script>
+	<script type="text/javascript" src="js/todoFocus.js"></script>
+	<script type="text/javascript" src="js/todoEscape.js"></script>
+</head>
+
+<body>
+	<div ng-view />
+</body>
+
+</html>

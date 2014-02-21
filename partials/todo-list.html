@@ -1,0 +1,45 @@
+<section id="todoapp" ng-show="validUser" ng-cloak>
+	<header id="header">
+		<h1>todos</h1>
+		<form id="todo-form" ng-submit="addItem()">
+			<input id="new-todo" placeholder="What needs to be done?" ng-model="newTodo" autofocus />
+		</form>
+	</header>
+
+	<section id="main" ng-show="todos.length" ng-cloak>
+		<input id="toggle-all" type="checkbox" ng-model="allChecked" ng-click="markAll(!allChecked)">
+		<!--<label for="toggle-all">Mark all as complete</label> -->
+		<ul id="todo-list">
+			<li ng-repeat="todo in todos | filter:shouldDisplay()" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+				<div class="view">
+					<input class="toggle" type="checkbox" ng-model="todo.completed" ng-change="updateCompleted(todo)">
+					<label ng-dblclick="editItem(todo)">{{todo.value}}</label>
+					<button class="destroy" ng-click="removeItem(todo)" />
+				</div>
+				<form ng-submit="doneEditing(todo)">
+					<input class="edit" ng-trim="false" ng-model="todo.value" todo-escape="revertEditing(todo)" ng-blur="doneEditing(todo)" todo-focus="todo == editedTodo">
+				</form>
+
+			</li>
+		</ul>
+
+	</section>
+
+	<footer id="footer" ng-show="todos.length" ng-cloak>
+		<span id="todo-count"><strong>{{remainingItems}} 
+			<ng-pluralize count="remainingItems" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
+		</strong></span>
+		<ul id="filters">
+			<li><a href="#" ng-class="{selected: todosFilter == ''}">All</a></li>
+			<li><a href="#/active" ng-class="{selected: todosFilter == 'active'}">Active</a></li>
+			<li><a href="#/completed" ng-class="{selected: todosFilter == 'completed'}">Completed</a></li>
+		</ul>
+		<button id="clear-completed" ng-show="countCompleted" ng-click="clearCompleted()">Clear completed ({{countCompleted}})</button>
+	</footer>
+
+</section>
+<footer id="info">
+	<p>Double-click to edit a todo</p>
+</footer>
+<!--{{newTodo + " length: " + newTodo.length}} <br/>
+{{todos | json}} -->
