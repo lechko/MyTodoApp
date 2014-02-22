@@ -24,6 +24,7 @@ function auth(req, res, next) {
 	next(req, res);
 }
 
+console.log('Starting web server...');
 
 app	.use(express.cookieParser())
 	.use(express.static(rootFolder))
@@ -37,4 +38,6 @@ app	.use(express.cookieParser())
 	.delete('/item', todos.deleteItem())
 	.use(express.pageNotFound());
 
-app.listen(1234);
+var port = Number(process.env.PORT || 3000);
+console.log("try to listen on port: " + port);
+app.listen(port);
