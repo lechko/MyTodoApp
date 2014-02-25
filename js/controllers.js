@@ -14,7 +14,7 @@ myTodoMVCApp.controller('LoginCtrl', ['$scope', '$routeParams', '$location', '$h
 			$scope.reason = "Login to see your TODO-list";
 		}
 		else if ($routeParams.reason === "session_invalid") {
-			$scope.reason = "Session in invalid or has expired. Please log-in again";
+			$scope.reason = "Session in invalid or has expired";
 		}
 	}
 

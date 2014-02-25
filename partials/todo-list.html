@@ -1,10 +1,10 @@
-<section id="todoapp" ng-show="validUser" ng-cloak>
-	<header id="header">
+<div id="todoapp" ng-show="validUser" ng-cloak>
+	<div id="header">
 		<h1>todos</h1>
 		<form id="todo-form" ng-submit="addItem()">
 			<input id="new-todo" placeholder="What needs to be done?" ng-model="newTodo" autofocus />
 		</form>
-	</header>
+	</div>
 
 	<section id="main" ng-show="todos.length" ng-cloak>
 		<input id="toggle-all" type="checkbox" ng-model="allChecked" ng-click="markAll(!allChecked)">
@@ -37,8 +37,8 @@
 		<button id="clear-completed" ng-show="countCompleted" ng-click="clearCompleted()">Clear completed ({{countCompleted}})</button>
 	</footer>
 
-</section>
-<footer id="info">
+</div>
+<footer id="info" ng-show="validUser" ng-cloak>
 	<p>Double-click to edit a todo</p>
 </footer>
 <!--{{newTodo + " length: " + newTodo.length}} <br/>
