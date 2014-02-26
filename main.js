@@ -1,10 +1,9 @@
-var express = require("./miniExpress"),
-	http = require('./miniHttp'),
+var express = require("./server/miniExpress"),
+	http = require('./server/miniHttp'),
 	path = require("path"),
 	app = express();
-var data = require('./data');
+var data = require('./server/data');
 var todos = data();
-var rootFolder = path.normalize(__dirname + "/../");
 
 function auth(req, res, next) {
 	// verify user and set req.user
@@ -27,7 +26,7 @@ function auth(req, res, next) {
 console.log('Starting web server...');
 
 app	.use(express.cookieParser())
-	.use(express.static(rootFolder))
+	.use(express.static(__dirname + "/www/"))
 	.post('/register', todos.registerUser())
 	.post('/login', todos.userLogin())
 	.use(auth)

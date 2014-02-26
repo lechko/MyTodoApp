@@ -36,7 +36,7 @@ module.exports = function () {
 				// create sessionId for user
 				sessions[userDetails.username] = uuid.v1();
 				// set cookie with sessionId and send
-				res.cookie('key', sessions[userDetails.username]);
+				res.cookie('key', sessions[userDetails.username], {'http-only': true});
 				res.status(200);
 				res.send("");
 
@@ -70,7 +70,7 @@ module.exports = function () {
 				// create sessionId for user
 				sessions[userDetails.username] = uuid.v1();
 				// set cookie with sessionId and send
-				res.cookie('key', sessions[userDetails.username]);
+				res.cookie('key', sessions[userDetails.username], {'http-only': true});
 				res.status(200);
 				res.send("");
 
@@ -121,6 +121,7 @@ module.exports = function () {
 
 	that.getItem = function () {
 		return function (req, res, next) {
+			console.log('here');
 			if (!req.user) {
 				next(req,res);
 				return;
@@ -147,6 +148,12 @@ module.exports = function () {
 					res.json({status: 1, msg: "item id already exists"});
 					return;
 				}
+				if (!req.body.value) {
+					res.status(400);
+					res.json({status: 1, msg: "bad request - missing \'value\' parameter"});
+					return;
+				}
+
 				if (!Items[req.user]) {
 					//create entry for user
 					Items[req.user] = [];
@@ -157,7 +164,7 @@ module.exports = function () {
 			} catch (ex) {
 				console.log(Date());
 				console.dir(ex);
-				res.status(500);
+				res.status(400);
 				res.json({status: 1, msg: "internal error"});
 			}
 		};
@@ -186,6 +193,7 @@ module.exports = function () {
 					res.json({status: 0});
 					return;
 				}
+				res.status(400);
 				res.json({status: 1, msg: "requested item doesnt exist for user"});
 			} catch (ex) {
 				console.log(Date());
@@ -222,6 +230,7 @@ module.exports = function () {
 					res.json({status: 0});
 					return;
 				}
+				res.status(400);
 				res.json({status: 1, msg: "requested item doesnt exist for user"});
 			} catch (ex) {
 				console.log(Date());
@@ -247,6 +256,7 @@ module.exports = function () {
 					next(req, res);
 					return;
 				}
+				res.status(400);
 				res.json({status: 1, msg: "missing id of item requested"});
 			} catch (ex) {
 				console.log(Date() + " in validateItem");

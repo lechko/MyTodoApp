@@ -216,7 +216,7 @@ module.exports = function () {
 function readRequestBody(req, callback) {
 	req.body = '';
 	
-	if (!req.headers["content-length"] || req.headers["content-length"] == 0) {
+	if (!req.headers["content-length"] || req.headers["content-length"] === 0) {
 		callback();
 		return;
 	}

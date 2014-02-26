@@ -1,0 +1,40 @@
+before running the tests start a new server and configure the test.js (hosname, port).
+
+at firs the tester signes up for the app by sending full name, username and password.
+in return, it receives a cookie to be used for the rest of the tests.
+
+these are the tests included and their results:
+
+----------------------------------------------
+add todo - adding a firsts todo to the users list
+{"status":0}
+success
+----------------------------------------------
+add todo (with bad params) - tries to add another but fails
+{"status":1,"msg":"bad request - missing 'value' parameter"}
+success
+----------------------------------------------
+add todo (with existing ID) - tries to add an item with an id that is already taken
+{"status":1,"msg":"item id already exists"}
+success
+----------------------------------------------
+get todos - gets the list of ths user's itmes
+[{"id":1,"value":"my first todo","completed":false}]
+success
+----------------------------------------------
+update todo (with ID that does not exist) - updating an item that doesn't exist will fail
+{"status":1,"msg":"requested item doesnt exist for user"}
+success
+----------------------------------------------
+update todo (change text and state)
+{"status":0}
+success
+----------------------------------------------
+remove todo (with ID that does not exist) - removing a non existing item will fail
+{"status":1,"msg":"requested item doesnt exist for user"}
+success
+----------------------------------------------
+remove todo - removes the item from the list
+{"status":0}
+success
+----------------------------------------------

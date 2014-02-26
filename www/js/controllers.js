@@ -43,6 +43,7 @@ myTodoMVCApp.controller('LoginCtrl', ['$scope', '$routeParams', '$location', '$h
 				username: $scope.userName,
 				password: $scope.password
 			};
+			console.log(JSON.stringify(userToRegister));
 			$http.post('/register', JSON.stringify(userToRegister))
 					.success(function() {
 						// good, we got a cookie
